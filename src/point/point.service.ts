@@ -15,14 +15,16 @@ export class PointService {
   ) {}
 
   create({ name, description, pointGroupId }: CreatePointDto) {
-    const point = this.pointRepository.create({
-      name,
-      description,
-      pointGroupId,
-      isActive: false,
-    });
-
-    return this.pointRepository.save(point);
+    return '';
+    // const point = this.pointRepository.create({
+    //   name,
+    //   pointGroupId
+    //   description,
+    //   pointGroupId,
+    //   isActive: false,
+    // });
+    //
+    // return this.pointRepository.save(point);
   }
 
   findAll() {

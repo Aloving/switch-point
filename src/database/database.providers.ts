@@ -2,6 +2,9 @@ import { createConnection } from 'typeorm';
 
 import { Provider } from '../enums';
 
+import { Point } from '../point/entities';
+import { PointGroup } from '../point-group/entities';
+
 export const databaseProviders = [
   {
     provide: Provider.DatabaseConnection,
@@ -13,7 +16,7 @@ export const databaseProviders = [
         username: 'root',
         password: 'root',
         database: 'switch-point',
-        entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+        entities: [Point, PointGroup],
         synchronize: true,
       }),
   },

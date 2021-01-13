@@ -16,7 +16,7 @@ export class PointGroupService {
     const pointGroup = this.pointGroupRepository.create({
       name,
       description,
-      points: [],
+      // points: [],
     });
 
     return this.pointGroupRepository.save(pointGroup);

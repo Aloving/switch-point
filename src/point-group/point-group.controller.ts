@@ -10,8 +10,7 @@ import {
 } from '@nestjs/common';
 import { Service } from '../enums';
 import { PointGroupService } from './point-group.service';
-import { CreatePointGroupDto } from './dto/create-point-group.dto';
-import { UpdatePointGroupDto } from './dto/update-point-group.dto';
+import { CreatePointGroupDto, UpdatePointGroupDto } from './dto';
 
 @Controller('point-group')
 export class PointGroupController {
