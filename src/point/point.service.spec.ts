@@ -20,6 +20,7 @@ describe('PointService', () => {
       const inputData = {
         name: 'test_name',
         description: 'test_description',
+        pointGroupId: 'test_pointGroup_id',
       };
       const createResponse = {
         id: 1,

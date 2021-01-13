@@ -14,10 +14,11 @@ export class PointService {
     private pointRepository: Repository<Point>,
   ) {}
 
-  create({ name, description }: CreatePointDto) {
+  create({ name, description, pointGroupId }: CreatePointDto) {
     const point = this.pointRepository.create({
       name,
       description,
+      pointGroupId,
       isActive: false,
     });
 

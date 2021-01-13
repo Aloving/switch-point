@@ -5,5 +5,8 @@ export class CreatePointDto {
   @Length(1, 50)
   readonly name: string;
 
+  @IsNotEmpty()
+  readonly pointGroupId: string;
+
   readonly description: string;
 }
