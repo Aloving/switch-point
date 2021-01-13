@@ -1,8 +1,10 @@
 import { Test } from '@nestjs/testing';
+import { Repository } from 'typeorm';
 
 import { PointController } from '../point.controller';
 import { PointService } from '../point.service';
-import { Repository, Service } from '../../enums';
+import { Repository as RepositoryEnum, Service } from '../../enums';
+import { Point } from '../entities';
 
 export const compileTestPointModule = async () => {
   const moduleRef = await Test.createTestingModule({
@@ -10,7 +12,7 @@ export const compileTestPointModule = async () => {
     imports: [],
     providers: [
       {
-        provide: Repository.PointRepository,
+        provide: RepositoryEnum.PointRepository,
         useValue: {
           create: jest.fn(),
           save: jest.fn(),
@@ -28,9 +30,13 @@ export const compileTestPointModule = async () => {
   }).compile();
   const pointController = moduleRef.get<PointController>(PointController);
   const pointService = moduleRef.get<PointService>(Service.PointService);
+  const pointRepository = moduleRef.get<Repository<Point>>(
+    RepositoryEnum.PointRepository,
+  );
 
   return {
     pointController,
     pointService,
+    pointRepository,
   };
 };

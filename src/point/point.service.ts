@@ -28,10 +28,6 @@ export class PointService {
     return this.pointRepository.find();
   }
 
-  findOne(id: number) {
-    return this.pointRepository.findOne(id);
-  }
-
   update(id: number, { name, description }: UpdatePointDto) {
     return this.pointRepository.update(id, { name, description });
   }
