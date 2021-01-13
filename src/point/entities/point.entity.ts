@@ -5,7 +5,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { PointGroup } from '../../point-group/entities';
+import { PointGroup } from '../../point-group';
 
 @Entity()
 export class Point {

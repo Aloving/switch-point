@@ -18,6 +18,7 @@ describe('PointController', () => {
       const testData = {
         name: 'test_name',
         description: 'test_description',
+        pointGroupId: 'test_pointGroupId',
       };
 
       jest.spyOn(pointService, 'create').mockResolvedValue('ok' as any);

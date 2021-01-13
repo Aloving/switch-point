@@ -1,18 +1,82 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { Repository } from 'typeorm';
+
 import { PointGroupService } from './point-group.service';
+import { compileTestPointGroupModule } from './helpers/testHelpers';
+import { PointGroup } from './entities';
 
 describe('PointGroupService', () => {
-  let service: PointGroupService;
+  let pointGroupRepository: Repository<PointGroup>;
+  let pointGroupService: PointGroupService;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [PointGroupService],
-    }).compile();
+    const pointGroupModule = await compileTestPointGroupModule();
 
-    service = module.get<PointGroupService>(PointGroupService);
+    pointGroupRepository = pointGroupModule.pointGroupRepository;
+    pointGroupService = pointGroupModule.pointGroupService;
   });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
+  describe('create', () => {
+    it('should call save method with create generated data and return value', async () => {
+      const inputData = {
+        name: 'test_name',
+        description: 'test_description',
+        points: [],
+      };
+      const createResponse = {
+        id: 1,
+        name: 'test_name',
+        description: 'test_description',
+        points: [],
+      };
+
+      (pointGroupRepository.create as jest.Mock).mockImplementation(
+        () => createResponse,
+      );
+      (pointGroupRepository.save as jest.Mock).mockResolvedValue('ok');
+
+      const response = await pointGroupService.create(inputData);
+
+      expect(pointGroupRepository.create).toHaveBeenCalledWith({
+        ...inputData,
+        points: [],
+      });
+      expect(pointGroupRepository.save).toHaveBeenCalledWith(createResponse);
+      expect(response).toEqual('ok');
+    });
+  });
+
+  describe('findAll', () => {
+    it('should call find method ', () => {
+      pointGroupService.findAll();
+
+      expect(pointGroupRepository.find).toHaveBeenCalled();
+    });
+  });
+
+  describe('update', () => {
+    it('should call update wth right params', () => {
+      const testData = {
+        name: 'test_name',
+        description: 'test_description',
+      };
+
+      (pointGroupRepository.update as jest.Mock).mockImplementation(() => 'ok');
+
+      const response = pointGroupService.update(10, testData);
+
+      expect(pointGroupRepository.update).toHaveBeenCalledWith(10, testData);
+      expect(response).toEqual('ok');
+    });
+  });
+
+  describe('remove', () => {
+    it('should call delete method and return its value', async () => {
+      (pointGroupRepository.delete as jest.Mock).mockImplementation(() => 'ok');
+
+      const response = await pointGroupService.remove(10);
+
+      expect(pointGroupRepository.delete).toHaveBeenCalledWith(10);
+      expect(response).toEqual('ok');
+    });
   });
 });

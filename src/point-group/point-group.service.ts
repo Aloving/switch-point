@@ -1,8 +1,8 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { CreatePointGroupDto } from './dto/create-point-group.dto';
-import { UpdatePointGroupDto } from './dto/update-point-group.dto';
-import { Repository as RepositoryEnum } from '../enums';
 import { Repository } from 'typeorm';
+import { Inject, Injectable } from '@nestjs/common';
+
+import { Repository as RepositoryEnum } from '../enums';
+import { CreatePointGroupDto, UpdatePointGroupDto } from './dto';
 import { PointGroup } from './entities';
 
 @Injectable()
@@ -12,23 +12,25 @@ export class PointGroupService {
     private pointGroupRepository: Repository<PointGroup>,
   ) {}
 
-  create(createPointGroupDto: CreatePointGroupDto) {
-    return 'This action adds a new pointGroup';
+  create({ name, description }: CreatePointGroupDto) {
+    const pointGroup = this.pointGroupRepository.create({
+      name,
+      description,
+      points: [],
+    });
+
+    return this.pointGroupRepository.save(pointGroup);
   }
 
   findAll() {
-    return `This action returns all pointGroup`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} pointGroup`;
+    return this.pointGroupRepository.find();
   }
 
   update(id: number, updatePointGroupDto: UpdatePointGroupDto) {
-    return `This action updates a #${id} pointGroup`;
+    return this.pointGroupRepository.update(id, updatePointGroupDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} pointGroup`;
+    return this.pointGroupRepository.delete(id);
   }
 }
