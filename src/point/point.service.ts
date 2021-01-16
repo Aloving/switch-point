@@ -14,25 +14,21 @@ export class PointService {
     private pointRepository: Repository<Point>,
   ) {}
 
-  create({ name, description, pointGroupId }: CreatePointDto) {
-    return '';
-    // const point = this.pointRepository.create({
-    //   name,
-    //   pointGroupId
-    //   description,
-    //   pointGroupId,
-    //   isActive: false,
-    // });
-    //
-    // return this.pointRepository.save(point);
+  create({ name, pointGroupId }: CreatePointDto) {
+    const point = this.pointRepository.create({
+      name,
+      pointGroupId,
+    });
+
+    return this.pointRepository.save(point);
   }
 
   findAll() {
     return this.pointRepository.find();
   }
 
-  update(id: number, { name, description }: UpdatePointDto) {
-    return this.pointRepository.update(id, { name, description });
+  update(id: number, { name }: UpdatePointDto) {
+    return this.pointRepository.update(id, { name });
   }
 
   remove(id: number) {

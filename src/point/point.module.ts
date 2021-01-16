@@ -9,6 +9,7 @@ import { Service } from '../enums';
 @Module({
   imports: [DatabaseModule],
   controllers: [PointController],
+  exports: [Service.PointService],
   providers: [
     ...pointProviders,
     {

@@ -6,7 +6,5 @@ export class CreatePointDto {
   readonly name: string;
 
   @IsNotEmpty()
-  readonly pointGroupId: string;
-
-  readonly description: string;
+  readonly pointGroupId: number;
 }

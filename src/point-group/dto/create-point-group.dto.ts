@@ -1,4 +1,5 @@
 import { IsNotEmpty, Length } from 'class-validator';
+import { Point } from '../../point/entities';
 
 export class CreatePointGroupDto {
   @IsNotEmpty()
@@ -6,4 +7,6 @@ export class CreatePointGroupDto {
   readonly name: string;
 
   readonly description: string;
+
+  readonly points: Omit<Point, 'id'>[];
 }

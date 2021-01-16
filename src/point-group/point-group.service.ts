@@ -12,11 +12,11 @@ export class PointGroupService {
     private pointGroupRepository: Repository<PointGroup>,
   ) {}
 
-  create({ name, description }: CreatePointGroupDto) {
+  create({ name, description, points }: CreatePointGroupDto) {
     const pointGroup = this.pointGroupRepository.create({
       name,
       description,
-      // points: [],
+      points,
     });
 
     return this.pointGroupRepository.save(pointGroup);
@@ -26,8 +26,15 @@ export class PointGroupService {
     return this.pointGroupRepository.find();
   }
 
-  update(id: number, updatePointGroupDto: UpdatePointGroupDto) {
-    return this.pointGroupRepository.update(id, updatePointGroupDto);
+  update(id: number, { points, description, name }: UpdatePointGroupDto) {
+    const updatedPointGroup = this.pointGroupRepository.create({
+      id,
+      description,
+      name,
+      points,
+    });
+
+    return this.pointGroupRepository.save(updatedPointGroup);
   }
 
   remove(id: number) {

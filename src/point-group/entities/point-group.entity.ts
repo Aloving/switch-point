@@ -1,4 +1,10 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 import { Point } from '../../point/entities';
 
@@ -13,6 +19,10 @@ export class PointGroup {
   @Column('text')
   description: string;
 
-  @OneToMany(() => Point, (point) => point.pointGroupId)
+  @OneToMany(() => Point, (point) => point.group, {
+    cascade: true,
+    eager: true,
+  })
+  @JoinTable()
   points: Point[];
 }

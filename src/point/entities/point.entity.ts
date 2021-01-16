@@ -12,16 +12,18 @@ export class Point {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 50 })
+  @Column({ length: 50, default: '' })
   name: string;
 
-  @Column('text')
-  description: string;
-
-  @Column('bool')
+  @Column('bool', {
+    default: false,
+  })
   isActive: boolean;
 
+  @Column({ nullable: true })
+  pointGroupId: number;
+
   @ManyToOne(() => PointGroup, (pointGroup) => pointGroup.points)
-  @JoinColumn({ name: 'id' })
-  pointGroupId: string;
+  @JoinColumn({ name: 'pointGroupId', referencedColumnName: 'id' })
+  group: PointGroup;
 }
