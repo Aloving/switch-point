@@ -8,12 +8,14 @@ import {
   Delete,
   Inject,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
 import { Service } from '../enums';
 import { PointService } from './point.service';
 import { CreatePointDto } from './dto/create-point.dto';
 import { UpdatePointDto } from './dto/update-point.dto';
 
+@ApiTags('points')
 @Controller('point')
 export class PointController {
   constructor(
