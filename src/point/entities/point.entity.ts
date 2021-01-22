@@ -5,23 +5,39 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
+import { ApiProperty } from '@nestjs/swagger';
+
 import { PointGroup } from '../../point-group';
 
 @Entity()
 export class Point {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @ApiProperty({
+    type: String,
+    required: true,
+  })
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
+  @ApiProperty({
+    type: String,
+    required: true,
+  })
   @Column({ length: 50, default: '' })
   name: string;
 
+  @ApiProperty({
+    type: Boolean,
+  })
   @Column('bool', {
     default: false,
   })
   isActive: boolean;
 
-  @Column({ nullable: true })
-  pointGroupId: number;
+  @ApiProperty({
+    type: String,
+  })
+  @Column()
+  pointGroupId: string;
 
   @ManyToOne(() => PointGroup, (pointGroup) => pointGroup.points)
   @JoinColumn({ name: 'pointGroupId', referencedColumnName: 'id' })
