@@ -54,17 +54,23 @@ describe('PointGroupService', () => {
   });
 
   describe('update', () => {
-    it('should call update wth right params', () => {
+    it('should call update wth right params', async () => {
       const testData = {
+        id: '10',
         name: 'test_name',
         description: 'test_description',
+        points: [],
       };
 
-      (pointGroupRepository.update as jest.Mock).mockImplementation(() => 'ok');
+      (pointGroupRepository.create as jest.Mock).mockImplementation(
+        () => testData,
+      );
+      (pointGroupRepository.save as jest.Mock).mockResolvedValue('ok');
 
-      const response = pointGroupService.update(10, testData);
+      const response = await pointGroupService.update('10', testData);
 
-      expect(pointGroupRepository.update).toHaveBeenCalledWith(10, testData);
+      expect(pointGroupRepository.create).toHaveBeenCalledWith(testData);
+      expect(pointGroupRepository.save).toHaveBeenCalledWith(testData);
       expect(response).toEqual('ok');
     });
   });
@@ -73,9 +79,9 @@ describe('PointGroupService', () => {
     it('should call delete method and return its value', async () => {
       (pointGroupRepository.delete as jest.Mock).mockImplementation(() => 'ok');
 
-      const response = await pointGroupService.remove(10);
+      const response = await pointGroupService.remove('10');
 
-      expect(pointGroupRepository.delete).toHaveBeenCalledWith(10);
+      expect(pointGroupRepository.delete).toHaveBeenCalledWith('10');
       expect(response).toEqual('ok');
     });
   });

@@ -10,13 +10,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Point } from '../../point/entities';
 
 @Entity()
-export class PointGroup {
-  @ApiProperty({
-    type: String,
-  })
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
+export class PointGroupData {
   @ApiProperty({
     type: String,
   })
@@ -42,4 +36,13 @@ export class PointGroup {
   })
   @JoinTable()
   points: Point[];
+}
+
+@Entity()
+export class PointGroup extends PointGroupData {
+  @ApiProperty({
+    type: String,
+  })
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 }

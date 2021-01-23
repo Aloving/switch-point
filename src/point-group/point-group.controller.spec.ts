@@ -18,6 +18,7 @@ describe('PointGroupController', () => {
       const testData = {
         name: 'test_name',
         description: 'test_description',
+        points: [],
       };
 
       jest.spyOn(pointGroupService, 'create').mockResolvedValue('ok' as never);
@@ -47,13 +48,14 @@ describe('PointGroupController', () => {
       const testPayload = {
         name: 'test_name',
         description: 'test_description',
+        points: [],
       };
 
       jest.spyOn(pointGroupService, 'update').mockResolvedValue('ok' as never);
 
-      const response = await pointGroupService.update(10, testPayload);
+      const response = await pointGroupService.update('10', testPayload);
 
-      expect(pointGroupService.update).toHaveBeenCalledWith(10, testPayload);
+      expect(pointGroupService.update).toHaveBeenCalledWith('10', testPayload);
       expect(response).toEqual('ok');
     });
   });
@@ -64,7 +66,7 @@ describe('PointGroupController', () => {
 
       const response = await pointGroupController.remove('10');
 
-      expect(pointGroupService.remove).toHaveBeenCalledWith(10);
+      expect(pointGroupService.remove).toHaveBeenCalledWith('10');
       expect(response).toEqual('ok');
     });
   });

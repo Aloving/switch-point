@@ -19,7 +19,7 @@ export class PointController {
     type: Point,
     description: 'Data of a point',
   })
-  update(@Param('id') id: string, @Body() setIsActiveDto: SetIsActiveDto) {
+  setStatus(@Param('id') id: string, @Body() setIsActiveDto: SetIsActiveDto) {
     return this.pointService.setIsActive(id, setIsActiveDto);
   }
 }

@@ -12,7 +12,7 @@ export class PointService {
     private pointRepository: Repository<Point>,
   ) {}
 
-  setIsActive(id, isActive) {
+  setIsActive(id: string, isActive: boolean) {
     return this.pointRepository.update(id, { isActive });
   }
 }

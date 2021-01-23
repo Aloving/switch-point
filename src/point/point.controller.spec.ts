@@ -13,59 +13,18 @@ describe('PointController', () => {
     pointService = pointModule.pointService;
   });
 
-  describe('create', () => {
+  describe('setStatus', () => {
     it('should call create method and return value', async () => {
       const testData = {
-        name: 'test_name',
-        description: 'test_description',
-        pointGroupId: 'test_pointGroupId',
+        isActive: false,
+        pointId: '123',
       };
 
-      jest.spyOn(pointService, 'create').mockResolvedValue('ok' as any);
+      jest.spyOn(pointService, 'setIsActive').mockResolvedValue('ok' as any);
 
-      const response = await pointController.create(testData);
+      const response = await pointController.setStatus('10', testData);
 
-      expect(pointService.create).toHaveBeenCalledWith(testData);
-      expect(response).toEqual('ok');
-    });
-  });
-
-  describe('findAll', () => {
-    it('should call findAll method and return value', async () => {
-      jest
-        .spyOn(pointService, 'findAll')
-        .mockResolvedValue(['ok', 'ok'] as any);
-
-      const response = await pointController.findAll();
-
-      expect(pointService.findAll).toHaveBeenCalled();
-      expect(response).toEqual(['ok', 'ok']);
-    });
-  });
-
-  describe('update', () => {
-    it('should call update method and return value', async () => {
-      const testPayload = {
-        name: 'test_name',
-        description: 'test_description',
-      };
-
-      jest.spyOn(pointService, 'update').mockResolvedValue('ok' as any);
-
-      const response = await pointController.update('10', testPayload);
-
-      expect(pointService.update).toHaveBeenCalledWith(10, testPayload);
-      expect(response).toEqual('ok');
-    });
-  });
-
-  describe('remove', () => {
-    it('should call remove method and return value', async () => {
-      jest.spyOn(pointService, 'remove').mockResolvedValue('ok' as any);
-
-      const response = await pointController.remove('10');
-
-      expect(pointService.remove).toHaveBeenCalledWith(10);
+      expect(pointService.setIsActive).toHaveBeenCalledWith('10', testData);
       expect(response).toEqual('ok');
     });
   });

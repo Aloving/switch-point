@@ -1,1 +1,1 @@
-export { PointGroup } from './point-group.entity';
+export * from './point-group.entity';
