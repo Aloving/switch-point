@@ -15,4 +15,10 @@ export class SetIsActiveDto {
   })
   @IsNotEmpty()
   readonly pointId: string;
+
+  @ApiProperty({
+    description: 'Group id of updated point',
+  })
+  @IsNotEmpty()
+  readonly pointGroupId: string;
 }

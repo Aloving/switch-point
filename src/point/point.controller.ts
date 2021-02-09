@@ -20,6 +20,6 @@ export class PointController {
     description: 'Data of a point',
   })
   setStatus(@Param('id') id: string, @Body() setIsActiveDto: SetIsActiveDto) {
-    return this.pointService.setIsActive(id, setIsActiveDto);
+    return this.pointService.setIsActive(setIsActiveDto);
   }
 }

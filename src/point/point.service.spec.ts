@@ -19,11 +19,18 @@ describe('PointService', () => {
     it('should call setIsActive wth right params', () => {
       (pointRepository.update as jest.Mock).mockImplementation(() => 'ok');
 
-      const response = pointService.setIsActive('10', true);
-
-      expect(pointRepository.update).toHaveBeenCalledWith('10', {
-        isActive: true,
+      const response = pointService.setIsActive({
+        pointId: 'point_id_test',
+        pointGroupId: 'point_group_test',
+        isActive: false,
       });
+
+      expect(pointRepository.update).toHaveBeenCalledWith(
+        { id: 'point_id_test', pointGroupId: 'point_group_test' },
+        {
+          isActive: false,
+        },
+      );
       expect(response).toEqual('ok');
     });
   });
