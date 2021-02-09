@@ -4,7 +4,6 @@ import { Repository } from 'typeorm';
 
 import { Point } from './entities';
 import { Repository as RepositoryEnum } from '../enums';
-import { SetIsActiveDto } from './dto';
 
 @Injectable()
 export class PointService {
@@ -13,10 +12,7 @@ export class PointService {
     private pointRepository: Repository<Point>,
   ) {}
 
-  setIsActive({ pointId, pointGroupId, isActive }: SetIsActiveDto) {
-    return this.pointRepository.update(
-      { id: pointId, pointGroupId },
-      { isActive },
-    );
+  setIsActive(pointId, isActive) {
+    return this.pointRepository.update(pointId, { isActive });
   }
 }

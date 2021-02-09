@@ -18,14 +18,13 @@ describe('PointController', () => {
       const testData = {
         isActive: false,
         pointId: '123',
-        pointGroupId: 'test',
       };
 
       jest.spyOn(pointService, 'setIsActive').mockResolvedValue('ok' as any);
 
       const response = await pointController.setStatus('10', testData);
 
-      expect(pointService.setIsActive).toHaveBeenCalledWith(testData);
+      expect(pointService.setIsActive).toHaveBeenCalledWith('10', false);
       expect(response).toEqual('ok');
     });
   });
