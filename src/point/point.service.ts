@@ -12,7 +12,7 @@ export class PointService {
     private pointRepository: Repository<Point>,
   ) {}
 
-  setIsActive(pointId, isActive) {
-    return this.pointRepository.update(pointId, { isActive });
+  async setIsActive(pointId, isActive) {
+    await this.pointRepository.update(pointId, { isActive });
   }
 }

@@ -24,7 +24,7 @@ describe('PointService', () => {
       expect(pointRepository.update).toHaveBeenCalledWith('point_id_test', {
         isActive: false,
       });
-      expect(response).toEqual('ok');
+      expect(response).not.toEqual('ok');
     });
   });
 });
