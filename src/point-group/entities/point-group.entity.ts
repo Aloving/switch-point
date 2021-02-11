@@ -32,7 +32,6 @@ export class PointGroupData {
   })
   @OneToMany(() => Point, (point) => point.group, {
     cascade: true,
-    onDelete: 'CASCADE',
     eager: true,
   })
   @JoinTable()
