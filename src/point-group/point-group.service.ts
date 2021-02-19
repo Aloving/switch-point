@@ -26,15 +26,8 @@ export class PointGroupService {
     return this.pointGroupRepository.find();
   }
 
-  update(id: string, { points, description, name }: UpdatePointGroupDto) {
-    const updatedPointGroup = this.pointGroupRepository.create({
-      id,
-      description,
-      name,
-      points,
-    });
-
-    return this.pointGroupRepository.save(updatedPointGroup);
+  update(id: string, updateData: UpdatePointGroupDto) {
+    return this.pointGroupRepository.save({ id, ...updateData });
   }
 
   async remove(id: string) {

@@ -39,7 +39,10 @@ export class Point {
   @Column()
   pointGroupId: string;
 
-  @ManyToOne(() => PointGroup, (pointGroup) => pointGroup.points)
+  @ManyToOne(() => PointGroup, (pointGroup) => pointGroup.points, {
+    onDelete: 'CASCADE',
+    orphanedRowAction: 'delete',
+  })
   @JoinColumn({ name: 'pointGroupId', referencedColumnName: 'id' })
   group: PointGroup;
 }
