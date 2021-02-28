@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  mysql:
+  db:
     image: mysql:5
     command: --character-set-server=utf8 --collation-server=utf8_general_ci
     restart: always
@@ -10,3 +10,21 @@ services:
       MYSQL_DATABASE: switch-point
     ports:
       - "3306:3306"
+    networks:
+      - switch-point-net
+
+  switch-point-backend:
+    image: kardanx/switch-point
+    restart: always
+    environment:
+      NODE_ENV: production
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    networks:
+      - switch-point-net
+
+networks:
+  switch-point-net:
+    external: true
